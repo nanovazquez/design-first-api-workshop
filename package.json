@@ -1,0 +1,22 @@
+{
+  "name": "design-first-api-workshop",
+  "version": "1.0.0",
+  "description": "Design-first APIs workshop",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanovazquez/design-first-api-workshop.git"
+  },
+  "keywords": [
+    "design-first",
+    "api",
+    "oas",
+    "swagger"
+  ],
+  "author": "nanovazquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nanovazquez/design-first-api-workshop/issues"
+  },
+  "homepage": "https://github.com/nanovazquez/design-first-api-workshop#readme"
+}
