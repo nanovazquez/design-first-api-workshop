@@ -64,18 +64,237 @@ Now it's time to implement our first document using the OAS/Swagger specificatio
 
 Let's start
 
-1. Write basic spec.
-1. Use right panel - Spec read & Mocking Service - Try it out! functionality.
+We are going to add the endpoint to retrieve the speakers of the conference.
+
+For this, first we are going to modify the **paths** object from:
+
+```
+paths: {}
+```
+
+to:
+
+```
+paths:
+  /editions/{editionId}/speakers:
+```
+
+Now that we've added this endpoint, we need to define a couple of things:
+
+- Define a new parameter for the endpoint:
+
+```
+paths:
+  /editions/{editionId}/speakers:
+    parameters:
+    - name: editionId
+      in: path
+      description: Year of the hosted edition
+      required: true
+      type: string
+```
+
+[TODO - NOTE EXPLAINING WHAT A PARAMETER IS]
+
+
+- Now, add a new action for the endpoint. This will be a **GET** action:
+
+```
+paths:
+  /editions/{editionId}/speakers:
+    parameters:
+      - $ref: '#/parameters/editionId'
+
+    get:
+```
+
+- Add a summary for the action.
+
+- Include what kind of format the response will produce. In this case, it will be a json
+
+- Define the responses of the endpoint. Let's add a **200** as a first expected response
+
+- You can provide more information to the response by adding a description
+
+- You can also detail the schema of the object to return when the endpoint is called.
+
+  - First you need to create a new definition. In this case you'll create the definition of a **Speaker** at the bottom of the Doc. A Speaker will have the following properties: [id, name, description, imageUrl, githubAccount, twitterAccount]
+
+```
+definitions:
+  Speaker:
+    type: object
+    required:
+      - id
+      - name
+      - description
+      - imageUrl
+      - githubAccount
+      - twitterAccount
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: John Doe
+      description:
+        type: string
+        example: Node JS Developer
+      imageUrl:
+        type: string
+        format: uri
+        example: http://some.image.com/image.png
+      githubAccount:
+        type: string
+        example: '@i-am-a-developer'
+      twitterAccount:
+        type: string
+        example: '@john-doe'
+```
+
+[TODO - ADD SCREENSHOT WITH MODEL CREATED AT LEFT PANEL]
+
+  - And finally you'll need to reference this definition on the schema of the endpoint:
+
+```
+    get:
+      summary: retrieves the speakers
+      produces:
+        - application/json
+      responses:
+        200:
+          description: all speakers of the edition
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Speaker'
+```
+
+- Now, click save
+
+Let's try this out!
+
+With this basic definition of the endpoint, we can use the **Try it out!** functionality to test how it would behave.
+
+- Using the right panel, look for the new speakers endpoint created, and click on it
+- Select the **Try it out** option
+- Place an **editionId** number, for example 2018
+- And finally click on **Execute**
+- Scroll down and see what the output was. As you can see, that information was previously populated by you when defining the schema of the speaker.
+
+```
+[
+  {
+    "id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "name": "John Doe",
+    "description": "Node JS Developer",
+    "imageUrl": "http://some.image.com/image.png",
+    "githubAccount": "@i-am-a-developer",
+    "twitterAccount": "@john-doe"
+  }
+]
+```
+
+[TODO - EXPLAIN WHY THIS WORKS AND WHAT IS A MOCKING SERVICE]
+
+TODO - Do the same thing with the other endpoints **/editions/{editionId}/agenda:**
+TODO - Do the same thing with the other endpoints **/editions/{editionId}/activities:**
+TODO - Do the same thing with the other endpoints **/editions/{editionId}/feedback:**
+
 
 ## Leverage Swagger capabilities to improve your OAS document
 
 1. Reuse parameters by redefining a type (editionId)
+
+-  Define a new **parameters** section at the bottom, with an property `editionId` inside with the information previously defined
+
+```
+parameters:
+  editionId:
+    name: editionId
+    in: path
+    description: Year of the hosted edition
+    required: true
+    type: integer
+```
+
+- For all the endpoints we've previously created, remove the harcoded parameter and change it for a reference to the **editionId** parameter. For example:
+
+```
+paths:
+  /editions/{editionId}/speakers:
+    parameters:
+      - $ref: '#/parameters/editionId'
+```
+
+
 1. Improve query by using an enum (event types). Explain that swagger 3.0 has a better way.
+
+When using query parameters that have defined codes, you can specify an enum on the property of the parameter to only accept those codes as possible.
+
+Let's use this on the example of the agenda, where users could filter on activity type. Types could be: [talk, lightning-talk, workshop, coffee-break]
+
+```
+...
+    get:
+      summary: Searches events on the agenda
+      description: Can search for all events on the agenda, or filter by type
+      parameters:
+        - in: query
+          name: type
+          description: pass an optional type to filter the events
+          required: false
+          type: string
+          enum: [talk, lightning-talk, workshop, coffee-break]
+```
+
 1. Define default response with ErrorResponse object
+
+You can specify a default response. For this add to the endpoints on the **responses** property the following:
+```
+      responses:
+        200:
+          description: all speakers of the edition
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Speaker'
+        default:
+          $ref: '#/definitions/ErrorResponse'
+```
+
+As you can see, it is using an **ErrorResponse** definition not yet placed in the doc. Add it on the **definitions** section:
+
+```
+definitions:
+  Speaker:
+    ...
+
+  ErrorResponse:
+    description: Response containing an error
+    type: object
+    properties:
+      errorMessage:
+        type: string
+```
 
 ## Test your newly created API
 
 1. Download Postman Collection and start hitting the API (mocking service)
+
+- Locate the export drop-down at the top-right corner of the screen, and click on it
+- Select **Download API**
+- Select **JSON Resolved**
+- This will download a **zip** file that you'll need to decompress.
+- Open **Postman**
+- Click on **Import**
+- On the **Import File** tab click on **Choose Files**
+- Locate and select the **.json** that was inside the generated zip file
+- A new collection will be added with all the requests our API currently has
+- Select any request, add an **editionId** to the request, and play with it.
+- You'll see that the responses are the same as when using the **Try it out!** feature, and this is because we are using the mocking server provided by Swagger Hub for you API.
 
 ## Bonus track
 
