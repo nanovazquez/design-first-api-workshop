@@ -1,15 +1,10 @@
-# Exercise 1: Writing your First API Specification
+# Exercise 1: Writing your first OAS Document
 
-In this exercise, you will
+In this exercise, you will learn what Swagger/OpenAPI is and how you can leverage the specification to to design your APIs from scratch. You will start by analyzing a simple use case and you'll use it to define (roughly) how you want our API to be. Then, you'll move to a web-based tool that not only will help us to write the API definition, but will also give us a lot of goodies for free that will allow our consumers to understand and test our API even if the real implementation does not exist. Finally, you will talk about the next steps of the API creation lifecycle and how you can use what you did to speed up the entire process.
 
-## Introduction
+But before going further, we need to address the elephant in the room, **what is Swagger, OpenAPI and OAS?**
 
-- What is swagger
-- Define use case: Build NodeConf App (explain it)
-- Define workforce: 2 different teams, one backend & one frontend (us)
-- Output: OAS Document (API Spec), which is a definition of our API
-
-### What is Swagger/OpenAPI/OAS
+## What is Swagger/OpenAPI/OAS
 
 Swagger is an open source software framework backed by a broad ecosystem of tools that helps developers design, build, document, standardize and consume [RESTful Web services](https://en.wikipedia.org/wiki/Representational_state_transfer). While most users identify Swagger by the Swagger UI tool, the Swagger toolset includes support for automated documentation, code generation, and test case generation.
 
@@ -21,10 +16,23 @@ In November 2015, the [Open API Initiative](https://www.openapis.org/) was creat
 
 > **Note:** The specification, as well as other information, is stored in GitHub. The current active version of the spec is **3.0.2**, but for this workshop, **we are going to focus OpenAPI 2.0**, mainly because the tools were not yet updated to v3. You can find the full documentation of the specs here:
 >
-> - [OpenAPI 2.0 specs](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (the version we are going to use in this workshop)
+> - [OpenAPI 2.0 specs](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (the version you are going to use in this workshop)
 > - [OpenAPI 3.0 specs](https://github.com/OAI/OpenAPI-Specification) (the current active version)
 
-## Use SwaggerHub to create an OAS document
+## The scenario
+
+We were asked by the NodeConf organizers to create an API for the conference this year, that might potentially be used by all NodeConf conferences in the world. The team is composed by a backend team and a front end team, and all members are scattered across the globe. The NodeConf organizers also want to make everything open source and well documented, allowing any developer to help the team with both the implementation and the definition of the API.
+
+The use cases that we need to support in this initial version are:
+
+- Retrieve the list of Speakers of an specific conference.
+- Retrieve the list of Activities of an specific conference, that may have one or more Speakers.
+- Retrieve the Agenda of the current conference, composed by one or more activities.
+- Finally, add the ability to provide feedback to each activity.
+
+## Steps
+
+### Create your first OAS document in SwaggerHub
 
 SwaggerHub is the official design tool for Swagger documents that help you to write APIs according to specification-based standards. This open source tool provides a lot of features in its free tier that you are going to use throughout this workshop:
 
@@ -36,9 +44,7 @@ SwaggerHub is the official design tool for Swagger documents that help you to wr
 
 > **Note:** In addition to the free tier, SwaggerHub offers two more subscriptions that provide extra capabilities more suited for teams and enterprises, like collaboration, source control sync, domain management, customer support, etc. You can find more info about this [here](https://swagger.io/tools/swaggerhub/pricing/).
 
-### Create your first OAS document in SwaggerHub
-
-In this section, you are going to sign in into SwaggerHub with your personal account and then you are going to create the skeleton of your first Swagger/OAS document.
+In this section, you are going to use SwaggerHub to create the skeleton of your first Swagger/OAS document in your own personal account.
 
 1. Open a new browser tab and navigate to the Swagger's Online Editor, [SwaggerHub](https://app.swaggerhub.com/).
 1. Create a new account associated with your GitHub profile or log in to your account.
@@ -65,7 +71,7 @@ In this section, you are going to sign in into SwaggerHub with your personal acc
 
    > **Note:** Why Swagger 2.0
 
-After the API is created, you will be redirected to your new OAS document. Some information will be filled in for you, like the swagger version, the information of the API (version, title and description), an empty paths field and some other stuff autogenerated by the Auto Mocking Plugin (we'll see what this is later in the exercise).
+After the API is created, you will be redirected to your new OAS document. Some information will be filled in for you, like the swagger version, the information of the API (version, title and description), an empty paths field and some other stuff autogenerated by the Auto Mocking Plugin (you'll see what this is later in the exercise).
 
 ![Your first OAS document in SwaggerHub]()
 
@@ -73,7 +79,7 @@ After the API is created, you will be redirected to your new OAS document. Some 
 
 - Lets identify objects (Speakers, Workshops, etc)
 
-Now it's time to implement our first document using the OAS/Swagger specification. We need to:
+Now it's time to implement our first document using the OAS/Swagger specification. You need to:
 
 - Retrieve the list of Speakers of an specific conference.
 - Retrieve the list of Activities of an specific conference, that may have one or more Speakers.
