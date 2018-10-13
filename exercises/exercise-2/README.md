@@ -18,14 +18,14 @@ In order to do so, we'll have to:
 
 1. From SwaggerHub, while you are editing your API, go to `Export > Codegen Options` in the upper-right corner.
 
-[TODO - ADD SCREENSHOT HERE SHOWING OPTION IN EXPORT MENU]
+    ![Codegen menu entry](./assets/codegen-menu-entry.jpg)
 
 2. In the options pop-up modal, search for `typescript-fetch` in the `Clients` section. and select it. In there, set the following values:
     - _(Optional)_ supportES6: `true`
     - npmVersion: The version of the npm package that will be the Client SDK. Example: `1.0.0`
     - npmName: The name of the npm package that will be the Client SDK. Example: `nodeconf-api`
 
-[TODO - ADD SCREENSHOT HERE SHOWING CONFIGURED VALUES IN MODAL]
+    ![Client SDK options](./assets/client-sdk-options.jpg)
 
 
 ## Download the Client SDK
@@ -35,7 +35,7 @@ which will download the Client SDK.
 
     Since you have now set some codegen option for that Client SDK (see previous step), it will display a `*` next to the menu entry.
 
-[TODO - ADD SCREENSHOT HERE SHOWING ENTRY IN MENU]
+    ![Client SDK Download](./assets/client-sdk-download.jpg)
 
 2. Unzip the downloaded file.
 
@@ -54,11 +54,14 @@ Therefore, **choose one of the following approaches**.
 
 ### To `npm link` the local package
 
-[TODO]
+1. From the directory of the downloaded client SDK, run `npm link`
+1. From the directory of the client UI, run `npm link <your-client-sdk-package-name>` (use the name you've set in the
+Codegen options, e.g. `nodeconf-api`, and *not* the directory name).
+1. Then, from the UI code you can `require`/`import` the package using that name (e.g. `nodeconf-api`).
 
 ### To require/import the local package
 
-[TODO]
+From the UI code, `require`/`import` the path to the folder containing the SDK instead of a package name that is in the UI's `package.json`. This approach is similar to just adding the client SDK code as part of your UI's repository.
 
 ## Use the SDK
 
@@ -67,6 +70,8 @@ Now that you have the client SDK added to our UI, it's time to actually make req
 [TODO make the following prettier, this just a quick reference]
 
 ```js
+// Replace the path with that of the client SDK directory, or with the client SDK
+// package name if you've used `npm link` or published the package to a registry
 const SDK = require('./typescript-fetch-client-generated');
 
 const apiClient = new SDK.DefaultApi(/*{basePath: 'http://localhost:9999/nodeconf-api'*/});
