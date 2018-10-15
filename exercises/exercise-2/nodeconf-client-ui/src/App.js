@@ -1,8 +1,13 @@
 import React, { Component, PureComponent } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-
 import {DefaultApi} from 'nodeconf-api';
+
+// ---
+
+const TWITTER_ICON_URL = 'https://pbs.twimg.com/profile_images/1013798240683266048/zRim1x6M_400x400.jpg';
+const GITHUB_ICON = 'https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2017-12-19/288981919427_f45f04edd92902a96859_512.png';
+
+// ---
 
 const api = new DefaultApi();
 
@@ -34,15 +39,28 @@ class App extends Component {
 class Loading extends PureComponent {
   render() {
     const entity = this.props.entity;
-    return <div>Loading {entity}...</div>;
+    return (
+      <div className='loading'>
+        Loading {entity}...
+      </div>
+    );
   }
 }
 
 class SpeakersList extends PureComponent {
-  makeSpeaker(speaker) {
+  makeSpeaker(speaker, number) {
     return (
-      <div>
-        { speaker.name }
+      <div className='speaker' key={'speaker-' + number}>
+        <div>
+          <span className='speaker-name'>{speaker.name}</span>
+          <a href={'https://twitter.com/' + speaker.twitterAccount}>
+            <img className='social-icon' src={TWITTER_ICON_URL} alt='twitter'/>
+          </a>
+          <a href={'https://github.com/' + speaker.githubAccount.replace('@', '')}>
+            <img className='social-icon' src={GITHUB_ICON} alt='github'/>
+          </a>
+        </div>
+        <img src={speaker.imageUrl} alt='speaker profile pic'/>
       </div>
     );
   }
@@ -51,9 +69,13 @@ class SpeakersList extends PureComponent {
     const {speakers} = this.props;
 
     return (
-      <div>
-        { this.makeSpeaker(speakers[0]) }
-        {/* { ...speakers.map(this.makeSpeaker) } */}
+      <div className='speakers-list'>
+        <div className='speakers-header'>
+          Speakers
+        </div>
+        <div>
+          { speakers.map(this.makeSpeaker) }
+        </div>
       </div>
     );
   }
