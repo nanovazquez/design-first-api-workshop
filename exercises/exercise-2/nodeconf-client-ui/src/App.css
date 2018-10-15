@@ -10,6 +10,7 @@
 
 .speakers-list {
   padding: 50px;
+  text-align: center;
 }
 
 .speaker {
@@ -23,8 +24,16 @@
   color: #adcb2b;
 }
 
+.speaker-pic {
+  max-height: 500px;
+}
+
 .social-icon {
   max-height: 40px;
+}
+
+.nodeconf-icon {
+  max-height: 100px;
 }
 
 body {
