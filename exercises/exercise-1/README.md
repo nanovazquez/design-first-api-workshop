@@ -350,11 +350,12 @@ You now need to create a path to retrieve the **Activities** of the conference. 
        get:
          summary: Searches for activities of an edition
          parameters:
-         - in: query
-           name: searchString
-           description: pass an optional search string for looking up activities
-           required: false
-           type: string
+          ...
+          - in: query
+            name: type
+            description: The activity type
+            required: false
+            type: string
    ```
 
    > **Note:** Learn more about query parameters by clicking [this](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameter-object) link.
@@ -582,7 +583,7 @@ There are certain operations in our API document that have a fixed set of values
 
    ![Click the Activity model](./assets/activity-model-click.png)
 
-1. Find the **type** property and add a new **enum** field with all the possible activity types: `[talk, workshop, keynote, break, lunch, raffle]`.
+1. Find the **type** property and replace the `example` field a new **enum** field with all the possible activity types: `[talk, workshop, keynote, break, lunch, raffle]`.
 
    ```
    Activity:
@@ -591,14 +592,34 @@ There are certain operations in our API document that have a fixed set of values
       ...
        type:
          type: string
-         example: workshop
          enum: [talk, workshop, keynote, break, lunch, raffle]
    ```
 
    > **Note:** you could create enums of any type, including `null`. But this field must contain at least one element in the array. For more information, see [this](https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1).
 
-1. Remove the **example** field and then click the green **Save** button at the top.
-1. Test this endpoint using the **Try it out!** button in the right panel. Notice that the _API Auto Mocking integration_ will retrieve the first item in the enum.
+1. Now, go to the `/editions/{editionId}/activities` path and add the same enum in the **query parameter**.
+
+   ```
+    /editions/{editionId}/activities:
+      parameters:
+        ...
+        - in: query
+          name: type
+          description: The activity type
+          required: false
+          type: string
+          enum: [talk, workshop, keynote, break, lunch, raffle]
+   ```
+
+1. Click the green **Save** button at the top and test this endpoint using the **Try it out!** button in the right panel.
+
+   Notice two things:
+
+   - The **query parameter** for activity types is a Select with a predefined set of options.
+   - The _API Auto Mocking integration_ will retrieve the first item of the enum.
+
+   ![Activity query parameter](./assets/activity-enum-query.png)
+
 1. Repeat the same steps for the **rating** property in the **Feedback** object to fix the values between 1 and 5.
 
    ```
@@ -629,7 +650,7 @@ There are certain operations in our API document that have a fixed set of values
            enum: [1, 2, 3, 4, 5]
    ```
 
-1. Finally, click the green **Save** button at the top and test the feedback path again by clicking the **Try it out** button in the right panel. Notice that the _rating_ field changed to a select component.
+1. Finally, click the green **Save** button at the top and test the feedback path again by clicking the **Try it out** button in the right panel. Notice that the _rating_ field changed from an input to a select field.
 
    ![Feedback rating select](./assets/feedback-rating-select.png)
 

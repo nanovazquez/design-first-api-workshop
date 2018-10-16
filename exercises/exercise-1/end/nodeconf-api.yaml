@@ -23,6 +23,12 @@ paths:
   /editions/{editionId}/activities:
     parameters:
       - $ref: "#/parameters/editionId"
+      - in: query
+        name: type
+        description: The activity type
+        required: false
+        type: string
+        enum: [talk, workshop, keynote, break, lunch, raffle]
     get:
       summary: Searches for activities of an edition
       produces:
