@@ -1,0 +1,282 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the API for the NodeConf AR18"
+  version: "1.0.0"
+  title: "NodeConf API"
+  contact:
+    email: "hello@nodeconf.com.ar"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/nodeconf18-api-spec/nodeconf-api/1.0.0"
+schemes:
+- "https"
+paths:
+  /editions/{editionId}/speakers:
+    get:
+      summary: "retrieves the speakers"
+      operationId: "editionsEditionIdSpeakersGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "editionId"
+        in: "path"
+        description: "Year of the hosted edition"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "all speakers of the edition"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Speaker"
+        default:
+          $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Default"
+  /editions/{editionId}/agenda:
+    get:
+      summary: "Searches events on the agenda"
+      description: "Can search for all events on the agenda, or filter by type"
+      operationId: "editionsEditionIdAgendaGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "editionId"
+        in: "path"
+        description: "Year of the hosted edition"
+        required: true
+        type: "integer"
+      - name: "type"
+        in: "query"
+        description: "pass an optional type to filter the events"
+        required: false
+        type: "string"
+        enum:
+        - "talk"
+        - "lightning-talk"
+        - "workshop"
+        - "coffee-break"
+      responses:
+        200:
+          description: "results of the agenda searched"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        default:
+          $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Default"
+  /editions/{editionId}/activities:
+    get:
+      summary: "Searches for activities of the event"
+      description: "Can search for activities given throughout the event"
+      operationId: "editionsEditionIdActivitiesGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "editionId"
+        in: "path"
+        description: "Year of the hosted edition"
+        required: true
+        type: "integer"
+      - name: "searchString"
+        in: "query"
+        description: "pass an optional search string for looking up activities"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "results of the searched activities"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Activity"
+        default:
+          $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Default"
+  /editions/{editionId}/feedback:
+    get:
+      summary: "Retrieves all feedbacks comments"
+      operationId: "editionsEditionIdFeedbackGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "editionId"
+        in: "path"
+        description: "Year of the hosted edition"
+        required: true
+        type: "integer"
+      - name: "searchString"
+        in: "query"
+        description: "pass an optional search string for looking up feedbacks comments"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "results of the searched feedback comments"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Feedback"
+        default:
+          $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Default"
+    post:
+      summary: "uploads a feedback comment"
+      operationId: "editionsEditionIdFeedbackPOST"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "editionId"
+        in: "path"
+        description: "Year of the hosted edition"
+        required: true
+        type: "integer"
+      - name: "ownerName"
+        in: "formData"
+        description: "Name of the feedback comment creator"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "Feedback comment content description"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Feedback"
+        default:
+          $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Default"
+definitions:
+  ErrorResponse:
+    type: "object"
+    properties:
+      errorMessage:
+        type: "string"
+        example: "500 Internal Server Error"
+    description: "Response containing an error"
+  Speaker:
+    type: "object"
+    required:
+    - "description"
+    - "githubAccount"
+    - "id"
+    - "imageUrl"
+    - "name"
+    - "twitterAccount"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "John Doe"
+      description:
+        type: "string"
+        example: "Node JS Developer"
+      imageUrl:
+        type: "string"
+        format: "uri"
+        example: "http://some.image.com/image.png"
+      githubAccount:
+        type: "string"
+        example: "@i-am-a-developer"
+      twitterAccount:
+        type: "string"
+        example: "@john-doe"
+    example:
+      twitterAccount: "@john-doe"
+      imageUrl: "http://some.image.com/image.png"
+      name: "John Doe"
+      description: "Node JS Developer"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      githubAccount: "@i-am-a-developer"
+  Event:
+    type: "object"
+    required:
+    - "description"
+    - "id"
+    - "name"
+    - "type"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Lightning Talk"
+      description:
+        type: "string"
+        example: "Lightning talk about using OAS"
+      type:
+        type: "string"
+        example: "lightning-talk"
+    example:
+      name: "Lightning Talk"
+      description: "Lightning talk about using OAS"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      type: "lightning-talk"
+  Activity:
+    type: "object"
+    required:
+    - "description"
+    - "id"
+    - "name"
+    - "type"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Coding Challenge"
+      description:
+        type: "string"
+        example: "Coding challenge to be done in the break room at 10:30am"
+      type:
+        type: "string"
+        example: "challenge"
+    example:
+      name: "Coding Challenge"
+      description: "Coding challenge to be done in the break room at 10:30am"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      type: "challenge"
+  Feedback:
+    type: "object"
+    required:
+    - "description"
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "John Doe"
+      description:
+        type: "string"
+        example: "First time at the NodeConfJS. This rocks!"
+    example:
+      name: "John Doe"
+      description: "First time at the NodeConfJS. This rocks!"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+parameters:
+  editionId:
+    name: "editionId"
+    in: "path"
+    description: "Year of the hosted edition"
+    required: true
+    type: "integer"
