@@ -1,8 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-    path = require('path'),
-    http = require('http');
+var cors = require('cors'),
+    fs = require('fs'),
+    http = require('http'),
+    path = require('path');
 
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
@@ -15,6 +16,9 @@ var options = {
   controllers: path.join(__dirname, './controllers'),
   useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
 };
+
+// Enable All CORS Requests
+app.use(cors());
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
