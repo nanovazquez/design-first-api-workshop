@@ -53,7 +53,7 @@ In this section, you are going to use SwaggerHub to create the skeleton of your 
 
 1. After logging/signing in, you will be redirected to **Your hub** page. In the left panel, click the **Create New** button and select **Create new API**.
 
-![Create new API](swaggerhub-create-new-api.png)
+![Create new API](./assets/swaggerhub-create-new-api.png)
 
 1. The **Select a Template or create a Blank API** modal will appear. Enter the following information and then click **Create API**.
 
