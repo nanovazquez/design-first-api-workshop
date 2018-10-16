@@ -66,7 +66,7 @@ which will open a browser tab and display the UI, which is served by default in 
         Since you have now set some codegen option for that Client SDK (see previous step), it will display a `*` next to
         the menu entry.
 
-        ![Client SDK Download](./assets/client-sdk-download.jpg)
+    ![Client SDK Download](./assets/client-sdk-download.jpg)
 
 2.  Unzip the downloaded file.
 
@@ -107,11 +107,11 @@ Therefore, **choose one of the following approaches**.
 1.  Then, from the UI code, simply `require`/`import` the path to the folder containing the SDK instead of a
     package name that is in the UI's `package.json`.
 
-        ```js
-        // Replace the path with that of the folder with the client SDK in your machine
-        // (it has to be within the src/ folder, you cannot import files outside the scope of your UI project)
-        import {DefaultApi} from './typescript-fetch-client-generated';
-        ```
+    ```js
+    // Replace the path with that of the folder with the client SDK in your machine
+    // (it has to be within the src/ folder, you cannot import files outside the scope of your UI project)
+    import {DefaultApi} from './typescript-fetch-client-generated';
+    ```
 
 ## Use the SDK
 
