@@ -1,19 +1,26 @@
 import React, { Component, PureComponent } from 'react';
 import './App.css';
 
-/* Import the client SDK */
-import {DefaultApi} from 'nodeconf-api';
 
 const TWITTER_ICON = 'https://pbs.twimg.com/profile_images/1013798240683266048/zRim1x6M_400x400.jpg';
 const GITHUB_ICON = 'https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2017-12-19/288981919427_f45f04edd92902a96859_512.png';
 const NODECONF_ICON = 'https://scontent.faep5-1.fna.fbcdn.net/v/t1.0-9/32337176_1971167233213188_8410774291854917632_n.png?_nc_cat=111&oh=b5f8b9ca353ba0d99b61ded0a3108fc8&oe=5C509FE1';
 
 
-/* Instantiate the SDK */
-const api = new DefaultApi();
+// - Import the SDK
+// - Instantiate it
+// - Replace the following function implementation for the actual call to the backend
+function getSpeakers() {
+  return Promise.resolve([{
+    name: 'hardcoded',
+    githubAccount: 'hardcoded',
+    twitterAccount: 'hardcoded',
+    imageUrl: 'hardcoded'
+  }]);
+}
 
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +29,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    /* Use the client SDK to call the Backend */
-    api.editionsEditionIdSpeakersGet(18)
+    getSpeakers()
       .then(speakers => this.setState({speakers}))
     ;
   }
@@ -39,6 +45,7 @@ class App extends Component {
   }
 }
 
+
 class Loading extends PureComponent {
   render() {
     const entity = this.props.entity;
@@ -49,6 +56,7 @@ class Loading extends PureComponent {
     );
   }
 }
+
 
 class SpeakersList extends PureComponent {
   makeSpeaker(speaker, number) {
@@ -86,5 +94,3 @@ class SpeakersList extends PureComponent {
     );
   }
 }
-
-export default App;
