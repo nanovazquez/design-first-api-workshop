@@ -159,7 +159,7 @@ With these ideas in mind, let's start updating our OAS document:
        parameters:
          ...
        get:
-        summary: Retrieves the speakers
+        ...
         responses:
           200:
             description: A list of speakers of the edition
@@ -175,7 +175,7 @@ With these ideas in mind, let's start updating our OAS document:
        parameters:
          ...
        get:
-         summary: Retrieves the speakers
+         ...
          responses:
            200:
              description: all speakers of the edition

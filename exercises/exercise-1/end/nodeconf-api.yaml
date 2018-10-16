@@ -10,6 +10,8 @@ paths:
       - $ref: "#/parameters/editionId"
     get:
       summary: Retrieves the speakers
+      produces:
+        - application/json
       responses:
         200:
           description: all speakers of the edition
