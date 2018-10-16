@@ -159,10 +159,10 @@ With these ideas in mind, let's start updating our OAS document:
        parameters:
          ...
        get:
-         summary: Retrieves the speakers
-       responses:
-         200:
-           description: A list of speakers of the edition
+        summary: Retrieves the speakers
+        responses:
+          200:
+            description: A list of speakers of the edition
    ```
 
    > **Note:** You can find more information about the **responses** object [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#responses-object).
