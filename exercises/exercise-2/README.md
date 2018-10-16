@@ -51,6 +51,9 @@ following values:
 
     ![Client SDK options](./assets/client-sdk-options.jpg)
 
+3. Click the `Save` button
+
+    ![Codegen save button](./assets/codegen-save-button.jpg)
 
 ## Download the Client SDK
 
@@ -102,8 +105,7 @@ package name that is in the UI's `package.json`.
 
     ```js
     // Replace the path with that of the folder with the client SDK in your machine
-    // (it has to be within the src/ folder due to security that the browser imposes, so you cannot import files from
-    // directories outside the scope of your UI project)
+    // (it has to be within the src/ folder, you cannot import files outside the scope of your UI project)
     import {DefaultApi} from './typescript-fetch-client-generated';
     ```
 
@@ -119,7 +121,7 @@ Now that you have the client SDK added to our UI, it's time to actually make req
    ```js
    // The following line returns a Promise that either resolves to the response body, or rejects with the entire
    // response object (when the status code is not 2xx).
-   api.editionsEditionIdSpeakersGet(18);
+   api.editionsEditionIdSpeakersGet(2018);
    ```
 
 That's it! You've now called the auto-mocked backend to fetch the list of speakers :tada:
