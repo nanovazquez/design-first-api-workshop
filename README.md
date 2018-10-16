@@ -11,6 +11,7 @@ Participants should have installed:
 - [Node 8.x](https://nodejs.org/en/) or higher installed in your laptop.
 - [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/) or similar.
 - A [GitHub account](https://github.com/).
+- [Postman](https://www.getpostman.com/) or similar.
 - An [Heroku account](https://signup.heroku.com/) and the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed in your laptop or similar (like [now](https://zeit.co/now)).
 
 ## Exercises

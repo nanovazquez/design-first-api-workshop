@@ -1,272 +1,181 @@
----
 swagger: "2.0"
 info:
-  description: "This is the API for the NodeConf AR18"
   version: "1.0.0"
   title: "NodeConf API"
-  contact:
-    email: "hello@nodeconf.com.ar"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "virtserver.swaggerhub.com"
-basePath: "/nodeconf18-api-spec/nodeconf-api/1.0.0"
-schemes:
-- "https"
+  description: "This is the API for the NodeConf"
+
 paths:
   /editions/{editionId}/speakers:
+    parameters:
+      - $ref: "#/parameters/editionId"
     get:
-      summary: "retrieves the speakers"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "editionId"
-        in: "path"
-        description: "Year of the hosted edition"
-        required: true
-        type: "integer"
+      summary: Retrieves the speakers
       responses:
         200:
-          description: "all speakers of the edition"
+          description: all speakers of the edition
           schema:
-            type: "array"
+            type: array
             items:
               $ref: "#/definitions/Speaker"
         default:
           $ref: "#/definitions/ErrorResponse"
-  /editions/{editionId}/agenda:
-    get:
-      summary: "Searches events on the agenda"
-      description: "Can search for all events on the agenda, or filter by type"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "editionId"
-        in: "path"
-        description: "Year of the hosted edition"
-        required: true
-        type: "integer"
-      - name: "type"
-        in: "query"
-        description: "pass an optional type to filter the events"
-        required: false
-        type: "string"
-        enum:
-        - "talk"
-        - "lightning-talk"
-        - "workshop"
-        - "coffee-break"
-      responses:
-        200:
-          description: "results of the agenda searched"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Event"
-        default:
-          $ref: "#/definitions/ErrorResponse"
+
   /editions/{editionId}/activities:
+    parameters:
+      - $ref: "#/parameters/editionId"
     get:
-      summary: "Searches for activities of the event"
-      description: "Can search for activities given throughout the event"
+      summary: Searches for activities of an edition
       produces:
-      - "application/json"
-      parameters:
-      - name: "editionId"
-        in: "path"
-        description: "Year of the hosted edition"
-        required: true
-        type: "integer"
-      - name: "searchString"
-        in: "query"
-        description: "pass an optional search string for looking up activities"
-        required: false
-        type: "string"
+        - application/json
       responses:
         200:
-          description: "results of the searched activities"
+          description: A list of activities that meet the search criteria
           schema:
-            type: "array"
+            type: array
             items:
               $ref: "#/definitions/Activity"
         default:
           $ref: "#/definitions/ErrorResponse"
+
   /editions/{editionId}/feedback:
-    get:
-      summary: "Retrieves all feedbacks comments"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "editionId"
-        in: "path"
-        description: "Year of the hosted edition"
-        required: true
-        type: "integer"
-      - name: "searchString"
-        in: "query"
-        description: "pass an optional search string for looking up feedbacks comments"
-        required: false
-        type: "string"
-      responses:
-        200:
-          description: "results of the searched feedback comments"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Feedback"
-        default:
-          $ref: "#/definitions/ErrorResponse"
+    parameters:
+      - $ref: "#/parameters/editionId"
     post:
-      summary: "uploads a feedback comment"
+      summary: Adds feedback to an activity
       consumes:
-      - "multipart/form-data"
+        - multipart/form-data
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "editionId"
-        in: "path"
-        description: "Year of the hosted edition"
-        required: true
-        type: "integer"
-      - name: "ownerName"
-        in: "formData"
-        description: "Name of the feedback comment creator"
-        required: true
-        type: "string"
-      - name: "description"
-        in: "formData"
-        description: "Feedback comment content description"
-        required: true
-        type: "string"
+        - name: activityId
+          in: formData
+          description: The ID of the activity
+          format: uuid
+          required: true
+          type: string
+        - name: username
+          in: formData
+          description: Name of the user
+          required: true
+          type: string
+        - name: rating
+          in: formData
+          description: Rating provided
+          required: true
+          type: integer
+          enum: [1, 2, 3, 4, 5]
       responses:
         201:
-          description: "successful operation"
+          description: The Feedback was received
           schema:
             $ref: "#/definitions/Feedback"
         default:
           $ref: "#/definitions/ErrorResponse"
+
 definitions:
-  ErrorResponse:
-    type: "object"
-    properties:
-      errorMessage:
-        type: "string"
-        example: "500 Internal Server Error"
-    description: "Response containing an error"
   Speaker:
-    type: "object"
+    type: object
     required:
-    - "description"
-    - "githubAccount"
-    - "id"
-    - "imageUrl"
-    - "name"
-    - "twitterAccount"
+      - id
+      - name
+      - description
+      - imageUrl
+      - githubAccount
+      - twitterAccount
     properties:
       id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
       name:
-        type: "string"
-        example: "John Doe"
+        type: string
+        example: John Doe
       description:
-        type: "string"
-        example: "Node JS Developer"
+        type: string
+        example: Node JS Developer
       imageUrl:
-        type: "string"
-        format: "uri"
-        example: "http://some.image.com/image.png"
+        type: string
+        format: uri
+        example: http://some.image.com/image.png
       githubAccount:
-        type: "string"
+        type: string
         example: "@i-am-a-developer"
       twitterAccount:
-        type: "string"
+        type: string
         example: "@john-doe"
-    example:
-      twitterAccount: "@john-doe"
-      imageUrl: "http://some.image.com/image.png"
-      name: "John Doe"
-      description: "Node JS Developer"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      githubAccount: "@i-am-a-developer"
-  Event:
-    type: "object"
-    required:
-    - "description"
-    - "id"
-    - "name"
-    - "type"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "Lightning Talk"
-      description:
-        type: "string"
-        example: "Lightning talk about using OAS"
-      type:
-        type: "string"
-        example: "lightning-talk"
-    example:
-      name: "Lightning Talk"
-      description: "Lightning talk about using OAS"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      type: "lightning-talk"
+
   Activity:
-    type: "object"
+    type: object
     required:
-    - "description"
-    - "id"
-    - "name"
-    - "type"
+      - id
+      - name
+      - type
     properties:
       id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
       name:
-        type: "string"
-        example: "Coding Challenge"
+        type: string
+        example: Design First APIs with OAS
       description:
-        type: "string"
-        example: "Coding challenge to be done in the break room at 10:30am"
+        type: string
+        example: Workshop to learn how to design APIs with Swagger/OpenAPI
       type:
-        type: "string"
-        example: "challenge"
-    example:
-      name: "Coding Challenge"
-      description: "Coding challenge to be done in the break room at 10:30am"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      type: "challenge"
+        type: string
+        enum: [talk, workshop, keynote, break, lunch, raffle]
+      speakers:
+        type: array
+        items:
+          $ref: "#/definitions/Speaker"
+      startTime:
+        type: string
+        example: "2018-10-18T19:30:00Z"
+      endTime:
+        type: string
+        example: "2018-10-18T20:00Z"
+
   Feedback:
-    type: "object"
+    type: object
     required:
-    - "description"
-    - "id"
-    - "name"
+      - id
+      - activityId
+      - username
+      - rating
     properties:
       id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "John Doe"
-      description:
-        type: "string"
-        example: "First time at the NodeConfJS. This rocks!"
-    example:
-      name: "John Doe"
-      description: "First time at the NodeConfJS. This rocks!"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      activityId:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      username:
+        type: string
+        example: John Doe
+      rating:
+        type: integer
+        enum: [1, 2, 3, 4, 5]
+
+  ErrorResponse:
+    description: Response containing an error
+    type: object
+    properties:
+      errorMessage:
+        type: string
+        example: 500 Internal Server Error
+
 parameters:
   editionId:
-    name: "editionId"
-    in: "path"
-    description: "Year of the hosted edition"
+    name: editionId
+    in: path
+    description: Year of the hosted edition
     required: true
-    type: "integer"
+    type: integer
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /nanovazquez/nodeconf-api/1.0.0
+schemes:
+  - https
