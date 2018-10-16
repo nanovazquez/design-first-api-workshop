@@ -49,7 +49,7 @@ which will open a browser tab and display the UI, which is served by default in 
 2.  In the options pop-up modal, search for `typescript-fetch` in the `Clients` section. and select it. In there, set the
     following values: - _(Optional)_ supportES6: `true` - npmVersion: The version of the npm package that will be the Client SDK. Example: `1.0.0` - npmName: The name of the npm package that will be the Client SDK. Example: `nodeconf-api`
 
-        ![Client SDK options](./assets/client-sdk-options.jpg)
+     ![Client SDK options](./assets/client-sdk-options.jpg)
 
 3.  Click the `Save` button
 
