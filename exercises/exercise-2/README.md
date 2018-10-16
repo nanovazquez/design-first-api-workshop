@@ -105,8 +105,7 @@ package name that is in the UI's `package.json`.
 
     ```js
     // Replace the path with that of the folder with the client SDK in your machine
-    // (it has to be within the src/ folder due to security that the browser imposes, so you cannot import files from
-    // directories outside the scope of your UI project)
+    // (it has to be within the src/ folder, you cannot import files outside the scope of your UI project)
     import {DefaultApi} from './typescript-fetch-client-generated';
     ```
 
