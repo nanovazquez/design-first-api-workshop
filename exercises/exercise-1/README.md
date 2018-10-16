@@ -350,7 +350,6 @@ You now need to create a path to retrieve the **Activities** of the conference. 
        get:
          summary: Searches for activities of an edition
          parameters:
-          ...
           - in: query
             name: type
             description: The activity type
@@ -518,11 +517,12 @@ Last, you need to create a path to provide feedback to activities, with a rating
      ...
      /editions/{editionId}/feedback:
        ...
-       responses:
-         201:
-           description: The Feedback was received
-           schema:
-             $ref: '#/definitions/Feedback'
+       post:
+        responses:
+          201:
+            description: The Feedback was received
+            schema:
+              $ref: "#/definitions/Feedback"
    ```
 
    > **Note:** You can find more information about the **responses** object [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#responses-object).
