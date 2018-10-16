@@ -51,6 +51,9 @@ following values:
 
     ![Client SDK options](./assets/client-sdk-options.jpg)
 
+3. Click the `Save` button
+
+    ![Codegen save button](./assets/codegen-save-button.jpg)
 
 ## Download the Client SDK
 
