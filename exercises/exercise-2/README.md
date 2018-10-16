@@ -122,7 +122,7 @@ Now that you have the client SDK added to our UI, it's time to actually make req
    ```js
    // The following line returns a Promise that either resolves to the response body, or rejects with the entire
    // response object (when the status code is not 2xx).
-   api.editionsEditionIdSpeakersGet(18);
+   api.editionsEditionIdSpeakersGet(2018);
    ```
 
 That's it! You've now called the auto-mocked backend to fetch the list of speakers :tada:
