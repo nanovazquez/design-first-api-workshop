@@ -695,6 +695,6 @@ As you did throughout the exercises, thanks to the _API Auto Mocking integration
 1. You now have a new a collection in Postman that contains all the information needed to query your API. For instance, click the **GET Retrieve the speakers** row in the left panel to create a new tab in Postman with the info needed for this call.
 1. Replace the **editionId** param key with `2018` and click the **Send** button. Verify that the response is the same one you get while using the **Try it out!** feature. This is because you are using the same _API Auto Mocking integration_ provided by SwaggerHub.
 
-   ![Postman GET speakers](./assets/postman-get-speakers)
+   ![Postman GET speakers](./assets/postman-get-speakers.png)
 
 Congratulations! 🎉 You are now ready to move to the next stage: implementing a client app that will consume your API.
