@@ -40,6 +40,8 @@ npm start
 
 which will open a browser tab and display the UI, which is served by default in `localhost:3000`.
 
+:point_right: The code you'll have to manually edit for the UI is in `exercise-2/nodeconf-client-ui/src/App.js` :point_left:
+
 > Changes you make to the codebase in later steps refresh the UI automatically, so you never need to stop & restart the
 > project.
 
@@ -95,7 +97,8 @@ Therefore, **choose one of the following approaches**.
 1. From the directory of the downloaded client SDK, run `npm link`
 1. From the directory of the client UI, run `npm link <your-client-sdk-package-name>` (use the name you've set in the
    Codegen options, e.g. `nodeconf-api`, and _not_ the directory name).
-1. Then, from the UI code you can `require`/`import` the package using that name (e.g. `nodeconf-api`).
+1. Then, from the UI code you can `require`/`import` the package using that name (e.g. `nodeconf-api`) in the `src/App.js` file.
+
    ```js
    // Replace the package name with what your client sdk package name
    import { DefaultApi } from "nodeconf-api";
@@ -108,8 +111,9 @@ Therefore, **choose one of the following approaches**.
 1.  Move the downloaded client SDK code to a folder within the `src/` directory inside the UI code, or create a symlink
     there to where you've downloaded (run `ln -s ~/Downloads/typescript-fetch-client-generated .` from within the `src/`
     folder).
+
 1.  Then, from the UI code, simply `require`/`import` the path to the folder containing the SDK instead of a
-    package name that is in the UI's `package.json`.
+    package name that is in the UI's `package.json` in the `src/App.js` file.
 
     ```js
     // Replace the path with that of the folder with the client SDK in your machine
@@ -122,10 +126,13 @@ Therefore, **choose one of the following approaches**.
 Now that you have the client SDK added to our UI, it's time to actually make requests to the (auto-mocked) backend!
 
 1. Instantiate the imported `DefaultApi` by doing:
+
    ```js
    const api = new DefaultApi();
    ```
+
 1. Call the backend to fetch the event speakers list by doing:
+
    ```js
    // The following line returns a Promise that either resolves to the response body, or rejects with the entire
    // response object (when the status code is not 2xx).
