@@ -687,8 +687,8 @@ The paths you defined were handling a single status code, the happy path. Since 
        responses:
          201:
            ...
-           default:
-             $ref: '#/definitions/ErrorResponse'
+         default:
+           $ref: '#/definitions/ErrorResponse'
    ```
 
    > **Note:** The `default` field can be used as the default response object for all HTTP codes that are not covered individually by the specification. For more information, see [this](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#responses-object)/
