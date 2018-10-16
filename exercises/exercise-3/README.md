@@ -270,4 +270,4 @@ To upload the project with [Now](https://zeit.co/now):
 
 You have now deployed your server stub on the cloud and can use it from whenever you want!
 
-In order to use it on the UI we've been working on this workshop, you just need to updaed the main base uri to point to the one provided by *Now*.
+In order to use it on the UI we've been working on this workshop, you just need to update the main base uri as the *basePath* of the *DefaultApi* to point to the one provided by *Now*.
