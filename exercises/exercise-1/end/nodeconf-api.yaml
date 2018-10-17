@@ -97,10 +97,7 @@ definitions:
     required:
       - id
       - name
-      - description
       - imageUrl
-      - githubAccount
-      - twitterAccount
     properties:
       id:
         type: string

@@ -203,10 +203,7 @@ With these ideas in mind, let's start updating our OAS document:
        required:
          - id
          - name
-         - description
          - imageUrl
-         - githubAccount
-         - twitterAccount
        properties:
          id:
            type: string
