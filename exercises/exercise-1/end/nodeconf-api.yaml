@@ -1,8 +1,19 @@
 swagger: "2.0"
 info:
-  version: "1.0.0"
-  title: "NodeConf API"
-  description: "This is the API for the NodeConf"
+  description: This is the API for the NodeConf AR 2018
+  version: 1.0.0
+  title: NodeConf API
+  contact:
+    email: hello@nodeconf.com.ar
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /nodeconf18-api-spec/nodeconf-api/1.0.0
+schemes:
+  - https
 
 paths:
   /editions/{editionId}/speakers:
@@ -25,14 +36,14 @@ paths:
   /editions/{editionId}/activities:
     parameters:
       - $ref: "#/parameters/editionId"
-      - in: query
-        name: type
-        description: The activity type
-        required: false
-        type: string
-        enum: [talk, workshop, keynote, break, lunch, raffle]
     get:
       summary: Searches for activities of an edition
+      parameters:
+        - in: query
+          name: searchString
+          description: pass an optional search string for looking up activities
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -181,9 +192,3 @@ parameters:
     description: Year of the hosted edition
     required: true
     type: integer
-
-# Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /nanovazquez/nodeconf-api/1.0.0
-schemes:
-  - https
