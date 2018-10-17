@@ -1,2 +1,50 @@
 .speakers {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.speaker {
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+  height: auto;
+  margin: 25px 35px 0 0;
+}
+
+.speaker:last-child {
+  margin-right: 0px;
+}
+
+.speaker .speaker-image {
+  width: 100%;
+  height: 264px;
+}
+
+.speaker .speaker-name {
+  color: #adcb2b;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+  width: auto;
+  height: auto;
+  flex: none;
+
+  text-align: left;
+  margin: 10px 0 5px 0;
+  padding: 0;
+}
+
+.speaker .speaker-description {
+  font-family: Cousine, monospace;
+  font-size: 1rem;
+  width: auto;
+  height: auto;
+  flex: none;
+
+  text-align: left;
+  margin: 0 0 0 0;
+  padding: 0;
 }

@@ -7,7 +7,7 @@ export default class Loading extends React.PureComponent {
     return (
       <div className="loading">
         <span>{text}</span>
-        <div class="loader" />
+        <div className="loader" />
       </div>
     );
   }

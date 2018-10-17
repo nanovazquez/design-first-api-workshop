@@ -1,20 +1,23 @@
 import React from "react";
 import "./Speakers.css";
 
-const Speaker = ({ name }) => (
+const Speaker = ({ speaker }) => (
   <div className="speaker">
-    <span className="name">{name}</span>
+    <img className="speaker-image" src={speaker.imageUrl} alt={speaker.name} />
+    <h5 className="speaker-name">{speaker.name}</h5>
+    <p className="speaker-description">{speaker.description}</p>
   </div>
 );
 
 export default class Speakers extends React.PureComponent {
   render() {
-    const { speakers = [] } = this.props;
+    const { speakers } = this.props;
+    console.log(JSON.stringify(speakers));
 
     return (
-      <div className="speakers-list">
+      <div className="speakers">
         {speakers.map(item => (
-          <Speaker speaker={item} />
+          <Speaker key={item.id} speaker={item} />
         ))}
       </div>
     );
