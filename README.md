@@ -12,7 +12,7 @@ Participants should have installed:
 - [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/) or similar.
 - A [GitHub account](https://github.com/).
 - [Postman](https://www.getpostman.com/) or similar.
-- A [Now account](https://zeit.co/now) and the [Now Cli](https://zeit.co/download#now-cli) globally installed (or similar, like Heroku)
+- [Optional] A [Now account](https://zeit.co/now) and the [Now Cli](https://zeit.co/download#now-cli) globally installed (or similar, like Heroku)
 
 ## Exercises
 
