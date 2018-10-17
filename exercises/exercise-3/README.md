@@ -79,13 +79,15 @@ In order to test if it's running as expected, you can hit any of the endpoints t
 
 Going back to the OAS Document, you will see that:
 
-- The API has a _basePath_ at the bottom, with the following format: **/{owner-name}/{api-name}/{api-version}**
+- The API has a _basePath_ defined at the bottom. It should look like:
+
+![Base Path](./assets/basepath-img.png)
 
 - To retrieve the speakers, you need to do a **GET** to **/editions/{editionId}/speakers**
 
-Combining these two things, plus the localhost baseUri, you get the following endpoint:
+Combining these two things, plus the localhost baseUri, you get the full path of the endpoint for retrieving the Speakers. Like for example:
 
-`http://localhost:8080/{owner-name}/{api-name}/{api-version}/editions/{editionId}/speakers`
+`http://localhost:8080/nodeconf18-api-spec/nodeconf-api/1.0.0/editions/2018/speakers`
 
 Replace _editionId_ for a valid integer number (like it was defined in the parameter schema) and consume the endpoint with your preferred way (Browser, Postman, curl, etc). For example:
 
