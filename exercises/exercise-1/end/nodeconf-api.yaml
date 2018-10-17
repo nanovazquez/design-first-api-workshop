@@ -105,20 +105,20 @@ definitions:
         example: d290f1ee-6c54-4b01-90e6-d701748f0851
       name:
         type: string
-        example: John Doe
+        example: Mariano Vazquez
       description:
         type: string
-        example: Node JS Developer
+        example: Tech Lead @ Mulesoft
       imageUrl:
         type: string
         format: uri
-        example: http://some.image.com/image.png
+        example: //raw.githubusercontent.com/nodeconfar/2018-website/gh-pages/assets/images/speakers/vazquez-on.jpg
       githubAccount:
         type: string
-        example: "@i-am-a-developer"
+        example: "@nanovazquez87"
       twitterAccount:
         type: string
-        example: "@john-doe"
+        example: "@nanovazquez87"
 
   Activity:
     type: object

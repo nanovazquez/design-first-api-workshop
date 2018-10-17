@@ -205,26 +205,26 @@ With these ideas in mind, let's start updating our OAS document:
          - name
          - imageUrl
        properties:
-         id:
-           type: string
-           format: uuid
-           example: d290f1ee-6c54-4b01-90e6-d701748f0851
-         name:
-           type: string
-           example: John Doe
-         description:
-           type: string
-           example: Node JS Developer
-         imageUrl:
-           type: string
-           format: uri
-           example: http://some.image.com/image.png
-         githubAccount:
-           type: string
-           example: '@i-am-a-developer'
-         twitterAccount:
-           type: string
-           example: '@john-doe'
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: Mariano Vazquez
+        description:
+          type: string
+          example: Tech Lead @ Mulesoft
+        imageUrl:
+          type: string
+          format: uri
+          example: //raw.githubusercontent.com/nodeconfar/2018-website/gh-pages/assets/images/speakers/vazquez-on.jpg
+        githubAccount:
+          type: string
+          example: "@nanovazquez87"
+        twitterAccount:
+          type: string
+          example: "@nanovazquez87"
    ```
 
    > **Note:** inside the _definition_ you can add any data type that follows the [Schema Object specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
