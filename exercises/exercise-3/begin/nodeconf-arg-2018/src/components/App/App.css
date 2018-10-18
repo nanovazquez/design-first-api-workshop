@@ -1,0 +1,28 @@
+.app {
+  text-align: center;
+}
+
+.app-header-location {
+  transition: color 0.15s ease-in;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-header-location:hover {
+  color: #54a2ff;
+}
+
+.app-header-logo {
+  margin-top: 2rem;
+}
+
+.app-header-date {
+  color: #adcb2b;
+  border: solid 1px #adcb2b;
+  font-size: 1.4rem;
+  padding: 0.5rem 0 0.5rem 0;
+  width: auto;
+}

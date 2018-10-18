@@ -1,7 +1,7 @@
 {
   "name": "nodeconf-api",
   "version": "1.0.0",
-  "description": "This is the API for the NodeConf AR18",
+  "description": "This is the API for the NodeConf AR 2018",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
