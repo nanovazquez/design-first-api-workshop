@@ -76,7 +76,7 @@ This worskhop explains you both approaches, but it is OK if you choose only one 
 
    ![UI CORS issue](./assets/ui-cors-issue.png)
 
-1. Enabling CORS in the Server Stub is straightforward. Open a terminal in the **typescript-fetch-client-generated** folder that contains your Server stub.
+1. Enabling CORS in the Server Stub is straightforward. Open a terminal in the **nodejs-server-server-generated** folder that contains your Server stub.
 
    > **Note:** Alternatively, you could use the Server Stub located in the **begin** folder of this exercise.
 
@@ -181,7 +181,7 @@ Deploying you server stub on the cloud will let you and your team work without k
    ![API Definition with server stub](./assets/api-definition-server-stub.png)
 
 1. Click the green **Save** button. To validate that server works using the right panel, you have to bypass the browser's security restrictions by installing a CORS plugin, like [this one](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi).
-1. Now, download the **typescript-fetch** Client SDK (the one we configured in the Exercise 2) by clicking **Export > Client SDK > typescript-fecth**. This Client SDK contains now a direct reference to your Server Stub, instead of pointing to the API Auto mocking service.
+1. Now, download the **typescript-fetch** Client SDK (the one we configured in the Exercise 2) by clicking **Export > Client SDK > typescript-fetch**. This Client SDK contains now a direct reference to your Server Stub, instead of pointing to the API Auto mocking service.
 1. Follow the same steps you did in Exercise 2 to connect the Client SDK with the UI (`npm link`). Notice that if you use this approach, the frontend team will know nothing about the server that is being used by the Client SDK.
 
 <br />
