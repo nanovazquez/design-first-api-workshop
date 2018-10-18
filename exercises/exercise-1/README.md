@@ -717,4 +717,4 @@ As you did throughout the exercises, thanks to the _API Auto Mocking integration
 
    ![Postman GET speakers](./assets/postman-get-speakers.png)
 
-Congratulations! 🎉 You are now ready to move to the next stage: implementing a client app that will consume your API.
+Congratulations! 🎉 You are now ready to move to the next stage: consuming your API from a client application (a website, a mobile app, a backend, etc.).
