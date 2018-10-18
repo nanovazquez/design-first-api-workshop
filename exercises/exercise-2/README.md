@@ -20,7 +20,7 @@ schemes:
 
 In case it is not turned on, follow these steps:
 
-1. Open [SwaggerHub](app.swaggerhub.com/) and navigate to the API definition you created in the previous exercise.
+1. Open [SwaggerHub](https://app.swaggerhub.com/) and navigate to the API definition you created in the previous exercise.
 1. Click the API name (`nodeconf-api`) located in the top left section of the page.
 1. Switch to the `Integrations` tab.
 1. Validate that the `API Auto Mocking` item is there and it's on.
@@ -141,7 +141,7 @@ In the next section, you are going to learn how to refresh your Client SDK with 
 
 For this workshop, you are going to continue using **npm link**, but the idea remains the same.
 
-1. Open [SwaggerHub](app.swaggerhub.com/) and navigate to the API definition you created in the previous exercise.
+1. Open [SwaggerHub](https://app.swaggerhub.com/) and navigate to the API definition you created in the previous exercise.
 1. Jump to the **editionId** definition in the **parameters** field. Change its type to **string**, this will allow us to have different edition names, like `2018-ar` or `2018-eu`.
 
    ```

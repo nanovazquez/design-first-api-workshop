@@ -1,6 +1,6 @@
 # Exercise 3: Creating a real service that implements your OAS document
 
-In this exercise, you will learn how to leverage SwaggerHub to generate an implementation of your API with just a few clicks. Then, you will then update your API document to point to this real implementation, instead of the API Auto Mocking integration you were using in the previous steps. Finally, you will see how easy is to refresh your clients/consumers to start receiving information from your real backend.
+In this exercise, you will learn how to leverage SwaggerHub to generate an implementation of your API with just a few clicks. Then, you will update your API document to point to this real implementation, instead of the API Auto Mocking integration you were using in the previous steps. Finally, you will see how easy is to refresh your clients/consumers to start receiving information from your real backend.
 
 ## What is a Server Stub
 
@@ -21,7 +21,7 @@ Now that you know what a Server Stub is, follow these steps to learn how to gene
    ![Export Server Stub](./assets/export-server-stub.png)
 
 1. A zipped file will start downloading. When it completes, unzip it.
-1. Open a terminal in the unzipped folder set up your project by running `npm start`. This will install all the project dependencies and run a server that will listen any call to http://localhost:8080.
+1. Open a terminal in the unzipped folder and set up your project by running `npm start`. This will install all the project dependencies and run a server that will listen any call to http://localhost:8080.
 
    ![Server Stub npm start](./assets/server-stub-npm-start.png)
 
@@ -35,7 +35,7 @@ You can now test your newly created Server stub by hitting any of the endpoints 
 
 Let's see what you can do with it:
 
-1. Open a browser window and navigate to http://localhost:8080/docs.
+1. Open a browser window and navigate to [http://localhost:8080/docs](http://localhost:8080/docs).
 1. The Server Stub comes with out of the box documentation of you API, that exposes the same documentation you saw in SwaggerHub, but makes it publicly available for any consumer of your API. It even has the **Try it out!** functionality you tested in Exercise 1. To use it, click the **List operations** link at the right, then click the **/editions/{editionId}/speakers**, enter a value for **editionId** and then click the **Try it out!** button.
 
    ![Docs page](./assets/docs-page.png)

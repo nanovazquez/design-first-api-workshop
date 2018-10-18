@@ -688,7 +688,7 @@ The paths you defined were handling a single status code, the happy path. Since 
            $ref: '#/definitions/ErrorResponse'
    ```
 
-   > **Note:** The `default` field can be used as the default response object for all HTTP codes that are not covered individually by the specification. For more information, see [this](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#responses-object)/
+   > **Note:** The `default` field can be used as the default response object for all HTTP codes that are not covered individually by the specification. For more information, see [this](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#responses-object).
 
 1. Click the green **Save** button.
 1. Finally, open the endpoint documentation at the top right and validate that the **default** response is now part of it.
