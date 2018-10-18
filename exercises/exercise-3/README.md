@@ -25,7 +25,7 @@ Now that you know what a Server Stub is, follow these steps to learn how to gene
 
    ![Server Stub npm start](./assets/server-stub-npm-start.png)
 
-   > **Note:** All dependencies will be installed before the server is executed because the _package.json_ file has a **prestart** script configured with `npm install`. You can learn more about npm and the predefined scripts [here](https://docs.npmjs.com/misc/scripts).
+   > **Note:** All dependencies will be installed before the server is executed. This behavior is configured in the _package.json_ file, that contains a **prestart** script that runs `npm install` before the **start** script. You can learn more about npm and the predefined scripts [here](https://docs.npmjs.com/misc/scripts).
 
 ### Testing the Server Stub
 
@@ -38,7 +38,7 @@ Let's see what you can do with it:
 1. Open a browser window and navigate to http://localhost:8080/docs.
 1. The Server Stub comes with out of the box documentation of you API, that exposes the same documentation you saw in SwaggerHub, but makes it publicly available for any consumer of your API. It even has the **Try it out!** functionality you tested in Exercise 1. To use it, click the **List operations** link at the right, then click the **/editions/{editionId}/speakers**, enter a value for **editionId** and then click the **Try it out!** button.
 
-![Docs page](./assets/docs-page.png)
+   ![Docs page](./assets/docs-page.png)
 
 1. Similarly, use Postman, curl or a browser to get the list of speakers. For instance, run `curl http://localhost:8080/nodeconf18-api-spec/nodeconf-api/1.0.0/editions/2018/speakers` in a terminal. You should see the same result you saw in the previous step.
 
@@ -72,11 +72,11 @@ This worskhop explains you both approaches, but it is OK if you choose only one 
    const api = new DefaultApi({ basePath: serverStubUrl });
    ```
 
-1. Run the app with `npm start`. A new browser window or tab will open, but no speaker will be displayed. Open the Console in the Developer Tools of your browser and notice that, despite you have configured the API properly, the browser rejects the request because your Server does not have CORS configured.
+1. Run the app with `npm start`. A new browser window or tab will open, but no speaker will be displayed. Open the Console in the Developer Tools of your browser and notice that, despite you have configured the API properly, the browser rejects the request because your Server does not allow CORS calls.
 
    ![UI CORS issue](./assets/ui-cors-issue.png)
 
-1. It is really simple to enable CORS in the Server Stub. Open a terminal in the **typescript-fetch-client-generated** folder that contains your Server stub.
+1. Enabling CORS in the Server Stub is straightforward. Open a terminal in the **typescript-fetch-client-generated** folder that contains your Server stub.
 
    > **Note:** Alternatively, you could use the Server Stub located in the **begin** folder of this exercise.
 
@@ -150,30 +150,40 @@ Yay!
 
 ### (Optional) Deploy your Server Stub in the cloud, update the API document and the Client SDK
 
-Deploying you server stub on the cloud will enable anyone to consume it, and so anyone from the team can work on the project and use the same implementation of the API for consistency.
+Deploying you server stub on the cloud will let you and your team work without knowing which API implementation your Client SDK is using: either the API Auto Mocking service or your own. Lots of solutions take care of uploading and deploying apps, like [Heroku](https://www.heroku.com/) or [Now](https://zeit.co/now). In this workshop, we are going to see how to use [Now](https://zeit.co/now), but feel free to use any other provider.
 
-There are lot of solutions that take care of uploading and deploying, like for example: Heroku or Now.
+> **Note:** If you prefer using Heroku but have never used it, you can follow this [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) tutorial.
 
-> **Note**: For the simplicity of it, in this workshop we are going to see how to use Now. If you prefer using Heroku but have never used it, you can follow this [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) tutorial.
+1. Open a terminal in the **nodejs-server-server-generated** folder. Alternatively, use the project located in the **end** folder of this exercise.
+1. Install the Now CLI globally by running `npm install -g now`.
+1. Once installed, run the command `now`. If it's your first time using it, it will ask you to create an account. Follow the steps to create an account and then run the `now` command again.
 
-To upload the project with [Now](https://zeit.co/now):
+   > **Note:** if you are getting errors while logging in, run `npm login` to restart the process.
 
-1. Install the cli globally by runnning the following command: `npm install -g now`
+1. The command will deploy your app in its servers, using one instance of the free plan. There are a few things you need to notice:
 
-1. Inside your server stub project folder, run the command `now`
+   - Now will generate a random URL for your service. Copy this value, you will need it later.
+   - To spin up your node server, Now will run `npm install` and then `node index.js`. This is the same thing the `npm start` command does.
 
-   - If it's your first time using it, it will ask you for your e-mail, and afterwards it will send you instructions on how to register an account. Follow these steps and once your account has been verified, run the `now` command again.
+   ![Now Deployment](./assets/now-deployment.png)
 
-1. It will verify that is ok to have it deployed publicly (As this is a free account it's the only way. You can find out more about premium plans [here](https://zeit.co/pricing))
+   > **Note:** You can find out more about the Now hosting plans [here](https://zeit.co/pricing).
 
-1. Wait for it to finish uploading and deploying and you are done.
+1. Test your deployed server by opening a browser window to the Swagger/OAS documentation. For instance, navigate to https://nodeconf-api-ctxjwutjfp.now.sh/docs/ or your own deployed server.
+1. Test one of the endpoints by running the following script in a terminal:
 
-You have now deployed your server stub on the cloud and can use it from whenever you want!
+   ```
+   curl -X GET --header 'Accept: application/json' 'https://nodeconf-api-ctxjwutjfp.now.sh/nodeconf18-api-spec/nodeconf-api/1.0.0/editions/2018/speakers'
+   ```
 
-In order to use it on the UI we've been working on this workshop, you just need to update the main base uri as the _basePath_ of the _DefaultApi_ to point to the one provided by _Now_.
+1. Now that you have a public deployed server, replace the API Auto Mocking service with the server's URL in your API definition. Depending on how you have configured it, you might need to update the **host** and **basePath**.
 
-```
+   ![API Definition with server stub](./assets/api-definition-server-stub.png)
 
-```
+1. Click the green **Save** button. To validate that server works using the right panel, you have to bypass the browser's security restrictions by installing a CORS plugin, like [this one](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi).
+1. Now, download the **typescript-fetch** Client SDK (the one we configured in the Exercise 2) by clicking **Export > Client SDK > typescript-fecth**. This Client SDK contains now a direct reference to your Server Stub, instead of pointing to the API Auto mocking service.
+1. Follow the same steps you did in Exercise 2 to connect the Client SDK with the UI (`npm link`). Notice that if you use this approach, the frontend team will know nothing about the server that is being used by the Client SDK.
+
+<br />
 
 Congratulations! 🎉🎉🎉 This concludes the set of exercises we have prepared for you. Go grab a ☕ (or a [mate](<https://en.wikipedia.org/wiki/Mate_(drink)>))!
