@@ -120,7 +120,7 @@ With these ideas in mind, let's start updating our OAS document:
          in: path
          description: Year of the hosted edition
          required: true
-         type: string
+         type: integer
    ```
 
    > **Note:** you can define parameters in your _path_, _query_, _body_ and _formData_. You can learn how to configure all of them by navigating [here](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameter-object).
@@ -323,7 +323,7 @@ You now need to create a path to retrieve the **Activities** of the conference. 
          in: path
          description: Year of the hosted edition
          required: true
-         type: string
+         type: integer
    ```
 
 1. Add a **GET** operation to retrieve a collection of activities, with a summary explaining what this operation does.
@@ -451,7 +451,7 @@ Last, you need to create a path to provide feedback to activities, with a rating
          in: path
          description: Year of the hosted edition
          required: true
-         type: string
+         type: integer
        post:
          summary: Adds feedback to an activity
    ```
