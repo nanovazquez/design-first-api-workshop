@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: vOpen API
+  description: The API for the OSS conferences
+
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/nanovazquez/vopen-tech-api-3.0/1.0.0
+
+paths:
+  /editions/{editionId}/speakers:
+    parameters:
+      - $ref: "#/definitions/editionId"
+
+    get:
+      summary: Retrieves the speakers
+      responses:
+        200:
+          description: all speakers of the edition
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Speaker"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+
+  /editions/{editionId}/activities:
+    parameters:
+      - $ref: "#/definitions/editionId"
+      - in: query
+        name: type
+        description: The activity type
+        required: false
+        schema:
+          type: string
+          enum: [talk, workshop, keynote, break, lunch, raffle]
+
+    get:
+      summary: Searches for activities of an edition
+      responses:
+        200:
+          description: A list of activities that meet the search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Activity"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+
+  /editions/{editionId}/feedback:
+    parameters:
+      - $ref: "#/definitions/editionId"
+
+    post:
+      summary: Adds feedback to an activity
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/definitions/FeedbackRequest"
+      responses:
+        201:
+          description: The Feedback was received
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/Feedback"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+
+components:
+  definitions:
+  Speaker:
+    type: object
+    required:
+      - id
+      - name
+      - description
+      - imageUrl
+      - githubAccount
+      - twitterAccount
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: John Doe
+      description:
+        type: string
+        example: Node JS Developer
+      imageUrl:
+        type: string
+        format: uri
+        example: http://some.image.com/image.png
+      githubAccount:
+        type: string
+        example: "@i-am-a-developer"
+      twitterAccount:
+        type: string
+        example: "@john-doe"
+
+  Activity:
+    type: object
+    required:
+      - id
+      - name
+      - type
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Design First APIs with OAS
+      description:
+        type: string
+        example: Workshop to learn how to design APIs with Swagger/OpenAPI
+      type:
+        type: string
+        enum: [talk, workshop, keynote, break, lunch, raffle]
+      speakers:
+        type: array
+        items:
+          $ref: "#/definitions/Speaker"
+      startTime:
+        type: string
+        example: "2018-10-18T19:30:00Z"
+      endTime:
+        type: string
+        example: "2018-10-18T20:00Z"
+
+  Feedback:
+    type: object
+    required:
+      - id
+      - activityId
+      - username
+      - rating
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      activityId:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      username:
+        type: string
+        example: John Doe
+      rating:
+        type: integer
+        enum: [1, 2, 3, 4, 5]
+
+  FeedbackRequest:
+    type: object
+    properties:
+      activityId:
+        description: The ID of the activity
+        type: string
+        format: uuid
+        required: true
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      username:
+        description: Name of the user
+        type: string
+        required: true
+        example: John Doe
+      rating:
+        description: Rating provided
+        type: integer
+        enum: [1, 2, 3, 4, 5]
+        required: true
+
+  ErrorResponse:
+    description: Response containing an error
+    type: object
+    properties:
+      errorMessage:
+        type: string
+        example: 500 Internal Server Error
+
+  editionId:
+    name: editionId
+    in: path
+    description: Year of the hosted edition
+    required: true
+    type: string
